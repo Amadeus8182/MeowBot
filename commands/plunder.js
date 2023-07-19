@@ -3,7 +3,7 @@ const check_user = require('../helpers/user-checker.js')
 const update_points = require('../helpers/points-updater.js');
 
 const sqlite3 = require('sqlite3');
-const db = new sqlite3.Database('../users.db');
+const db = new sqlite3.Database('./users.db');
 
 module.exports = {
 	name: 'plunder',
