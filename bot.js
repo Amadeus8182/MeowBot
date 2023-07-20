@@ -35,11 +35,10 @@ db.prepare(`CREATE TABLE IF NOT EXISTS
 		id TEXT,
 		username TEXT,
 		points BIGINT UNSIGNED DEFAULT 0,
-		plunder_last_used BIGINT UNSIGNED DEFAULT 0,
+		plunder_next_used BIGINT UNSIGNED DEFAULT 0,
 		UNIQUE(id)
 	)`, (err) => {if(err) return console.log(err)}
 ).run().finalize();
-
 
 /*=========================================================*/
 // MAIN STUFF
