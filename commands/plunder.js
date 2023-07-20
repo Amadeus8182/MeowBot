@@ -1,4 +1,3 @@
-const { EmbedBuilder } = require("@discordjs/builders")
 const check_user = require('../helpers/user-checker.js')
 const update_points = require('../helpers/points-updater.js');
 
