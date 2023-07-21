@@ -1,3 +1,4 @@
+// Silly Intro
 console.log('Bot is Starting... Meow Meow...\n\n');
 console.log(
 `             *     ,MMM8&&&.            *
@@ -24,8 +25,23 @@ console.log(
 
 
 /*=========================================================*/
+// DATABASE STUFF
+const sqlite3 = require('sqlite3');
+const db = new sqlite3.Database('./users.db');
 
+// during every startup of bot, check if table already exists
+db.prepare(`CREATE TABLE IF NOT EXISTS 
+	user_info(
+		id TEXT,
+		username TEXT,
+		points BIGINT UNSIGNED DEFAULT 0,
+		plunder_next_used BIGINT UNSIGNED DEFAULT 0,
+		UNIQUE(id)
+	)`, (err) => {if(err) return console.log(err)}
+).run().finalize();
 
+/*=========================================================*/
+// MAIN STUFF
 require('dotenv').config();
 const fs = require('fs');
 const {Client, GatewayIntentBits, Collection, Partials, EmbedBuilder} = require('discord.js');

@@ -1,4 +1,4 @@
-const get_gif = require('../helpers/gif-getter')
+const get_gif = require('../helpers/get_gif.js')
 
 module.exports = {
     name: 'meow',
