@@ -13,14 +13,20 @@ module.exports = {
 
 		await check_user.execute(USER_ID, USERNAME);
 
-		let needed_info = ['points', 'plunder_next_used']
+		let needed_info = ['points', 'plunder_next_used', 'raid_next_used', 'pillage_next_used']
 		let info = await get_user_info.execute(USER_ID, needed_info)
 
 		let time_now = Math.floor(new Date() / 1000)
 		let plunder_cooldown = get_cooldown(info.plunder_next_used, time_now, {h:false,m:true,s:true});
+		let raid_cooldown = get_cooldown(info.raid_next_used, time_now, {h:true,m:true,s:true});
+		let pillage_cooldown = get_cooldown(info.pillage_next_used, time_now, {h:true,m:true,s:true});
 
 		let display_info = [`Points: ${info.points}`,
-							`Plunder: ${plunder_cooldown}`].map(s => '◆ '+s);
+							`\nCooldowns`,
+							`Plunder: ${plunder_cooldown}`,
+							`Raid: ${raid_cooldown}`,
+							`Pillage: ${pillage_cooldown}`
+						   ].map(s => '◆ '+s);
 
 		let embed = new EmbedBuilder()
 			.setColor(parseInt((Math.random()*0xFFFFFF<<0).toString(16), 16)) // random colors
