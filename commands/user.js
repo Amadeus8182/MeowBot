@@ -19,10 +19,11 @@ module.exports = {
 		let needed_info = ['points', 'plunder_next_used']
 		let info = await get_user_info.execute(USER_ID, needed_info)
 
-		let seconds_since_epoch = Math.floor(new Date() / 1000)
-		let plunder_cooldown = new Date(info.plunder_next_used-seconds_since_epoch*1000).toISOString().substring(11,19);
+		let time_now = Math.floor(new Date() / 1000)
+		let plunder_cooldown = get_cooldown(info.plunder_next_used, time_now, {h:false,m:true,s:true});
+
 		let display_info = [`Points: ${info.points}`,
-							`Plunder: ${plunder_cooldown}`];
+							`Plunder: ${plunder_cooldown}`].map(s => '◆ '+s);
 
 		let embed = new EmbedBuilder()
 			.setColor(parseInt((Math.random()*0xFFFFFF<<0).toString(16), 16)) // random colors
@@ -34,6 +35,17 @@ module.exports = {
 
 		msg.channel.send({embeds: [embed]});
 	}
+}
+
+function get_cooldown(next_used, time_now, options) {
+	let cooldown = next_used-time_now;
+	if(cooldown <= 0) return 'Ready!';
+
+	let readable_cooldown = '';
+	if(options.h) readable_cooldown += `${Math.floor(cooldown/3600)}h `
+	if(options.m) readable_cooldown += `${Math.floor((cooldown%3600)/60)}m `
+	if(options.s) readable_cooldown += `${Math.floor(cooldown%60)}s `
+	return readable_cooldown
 }
 
 function get_account_created(msg_author) {
