@@ -22,7 +22,6 @@ module.exports = {
 		let pillage_cooldown = get_cooldown(info.pillage_next_used, time_now, {h:true,m:true,s:true});
 
 		let display_info = [`Points: ${info.points}`,
-							`\nCooldowns`,
 							`Plunder: ${plunder_cooldown}`,
 							`Raid: ${raid_cooldown}`,
 							`Pillage: ${pillage_cooldown}`
