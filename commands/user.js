@@ -12,7 +12,7 @@ module.exports = {
 
 		const USERNAME = msg.author.username;
 		const USER_ID = msg.author.id;
-		let account_date, account_time = get_account_created(msg.author);
+		let { account_date, account_time } = get_account_created(msg.author);
 
 		await check_user.execute(USER_ID, USERNAME);
 
@@ -61,5 +61,5 @@ function get_account_created(msg_author) {
 	let account_seconds = account_created.getUTCSeconds().toString().padStart(2, '0');
 	let account_time = `${account_hours}:${account_minutes}:${account_seconds}`;
 
-	return account_date, account_time;
+	return { account_date, account_time };
 }
