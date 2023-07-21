@@ -2,9 +2,6 @@ const { EmbedBuilder } = require("@discordjs/builders")
 const check_user = require('../helpers/check_user.js')
 const get_user_info = require('../helpers/get_user_info.js')
 
-const sqlite3 = require('sqlite3');
-const db = new sqlite3.Database('./users.db');
-
 module.exports = {
 	name: 'user',
 	desc: 'view information about your profile',
